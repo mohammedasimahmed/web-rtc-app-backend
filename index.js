@@ -15,15 +15,16 @@ const io = require("socket.io")(server,{
 
 io.on("connection",(socket)=>{
     console.log("Connected with client")
-    socket.on("Call_offer",({offer,iceCand})=>{
-        socket.broadcast.emit("Call_offer",{offer,iceCand})
-        console.log(offer)
+    socket.on("join_room",(room)=>{
+        socket.join(room)
+        socket.to(room).emit("new_user",socket.id)
+        console.log("joined room "+room)
     })
-    socket.on("Send_ans",({ans,iceCand})=>{
-        socket.broadcast.emit("Send_ans",{ans,iceCand})
+    socket.on("leave_room",(room)=>{
+        socket.leave(room)
     })
-    socket.on("sendVideo",(stream)=>{
-        socket.broadcast.emit("sendVideo",stream)
+    socket.on("disconnect",()=>{
+        socket
     })
 })
 

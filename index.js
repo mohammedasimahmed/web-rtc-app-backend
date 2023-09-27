@@ -36,4 +36,4 @@ io.on("connection",(socket)=>{
     });
 })
 
-server.listen(PORT,()=>console.log("Server started at port 5000"))
+server.listen(PORT,()=>console.log(`Server started at port ${PORT}`))

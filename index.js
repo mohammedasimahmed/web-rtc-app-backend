@@ -4,12 +4,13 @@ const cors = require("cors")
 const http = require("http")
 const app = express()
 const server = http.createServer(app)
+const PORT = process.env.PORT || 5000
 
 app.use(cors())
 
 const io = require("socket.io")(server,{
     cors:{
-        origin:"http://localhost:5173"
+        origin:"*"
     }
 })
 
@@ -35,4 +36,4 @@ io.on("connection",(socket)=>{
     });
 })
 
-server.listen(5000,()=>console.log("Server started at port 5000"))
+server.listen(PORT,()=>console.log("Server started at port 5000"))
